@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+   <div class="hmcts-add-another">
+
+<h1 class="govuk-heading-xl hmcts-add-another__heading" tabindex="-1">Create questions</h1>
+
+<form method="post">
+
+<fieldset class="govuk-fieldset hmcts-add-another__item">
+
+  <legend class="govuk-fieldset__legend hmcts-add-another__title  govuk-fieldset__legend--m">
+
+    Question
+
+  </legend>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="questions[0][subject]">
+      Subject
+    </label>
+
+    <input class="govuk-input" id="questions[0][subject]" name="questions[0][subject]" type="text" data-name="questions[%index%][subject]" data-id="questions[%index%][subject]">
+  </div>
+
+  <div class="govuk-form-group">
+    <label class="govuk-label" for="questions[0][question]">
+      Question
+    </label>
+
+    <textarea class="govuk-textarea" id="questions[0][question]" name="questions[0][question]" rows="5" data-name="questions[%index%][question]" data-id="questions[%index%][question]"></textarea>
+  </div>
+
+</fieldset>
+
+<div class="hmcts-button-action">
+
+  <button type="submit" class="govuk-button hmcts-button--secondary  hmcts-add-another__add-button  govuk-!-margin-bottom-4" data-module="govuk-button">
+    Add another question
+  </button>
+
+</div>
+
+<div class="hmcts-button-action">
+
+  <button type="submit" class="govuk-button" data-module="govuk-button">
+    Submit
+  </button>
+
+</div>
+
+</form>
+
+</div> 
+
+   
+  </div>{# /govuk-grid-column-two-thirds #}
+</div>{# /govuk-grid-row #}
+
+{% endblock %}
