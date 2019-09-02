@@ -9,59 +9,64 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-   <div class="hmcts-add-another">
+<div class="hmcts-add-another">
 
 <h1 class="govuk-heading-xl hmcts-add-another__heading" tabindex="-1">Create questions</h1>
 
 <form method="post">
 
-<fieldset class="govuk-fieldset hmcts-add-another__item">
+{% call govukFieldset({
+  classes: 'hmcts-add-another__item',
+  legend: {
+    text: 'Question',
+    classes: 'hmcts-add-another__title  govuk-fieldset__legend--m',
+    isPageHeading: false
+  }
+}) %}
 
-  <legend class="govuk-fieldset__legend hmcts-add-another__title  govuk-fieldset__legend--m">
+{{ govukInput({
+  label: {
+    html: 'Subject'
+  },
+  id: 'questions[0][subject]',
+  name: 'questions[0][subject]',
+  attributes: {
+    'data-name': 'questions[%index%][subject]',
+    'data-id': 'questions[%index%][subject]'
+  }
+}) }}
 
-    Question
+{{ govukTextarea({
+  name: 'questions[0][question]',
+  id: 'questions[0][question]',
+  attributes: {
+    'data-name': 'questions[%index%][question]',
+    'data-id': 'questions[%index%][question]'
+  },
+  label: {
+    html: 'Question'
+  }
+}) }}
 
-  </legend>
-
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="questions[0][subject]">
-      Subject
-    </label>
-
-    <input class="govuk-input" id="questions[0][subject]" name="questions[0][subject]" type="text" data-name="questions[%index%][subject]" data-id="questions[%index%][subject]">
-  </div>
-
-  <div class="govuk-form-group">
-    <label class="govuk-label" for="questions[0][question]">
-      Question
-    </label>
-
-    <textarea class="govuk-textarea" id="questions[0][question]" name="questions[0][question]" rows="5" data-name="questions[%index%][question]" data-id="questions[%index%][question]"></textarea>
-  </div>
-
-</fieldset>
+{% endcall %}
 
 <div class="hmcts-button-action">
-
-  <button type="submit" class="govuk-button hmcts-button--secondary  hmcts-add-another__add-button  govuk-!-margin-bottom-4" data-module="govuk-button">
-    Add another question
-  </button>
-
+  {{ govukButton({
+    text: 'Add another question',
+    classes: 'hmcts-button--secondary  hmcts-add-another__add-button  govuk-!-margin-bottom-4'
+  }) }}
 </div>
 
 <div class="hmcts-button-action">
-
-  <button type="submit" class="govuk-button" data-module="govuk-button">
-    Submit
-  </button>
-
+  {{ govukButton({
+    text: 'Submit'
+  }) }}
 </div>
 
 </form>
 
 </div> 
 
-   
   </div>{# /govuk-grid-column-two-thirds #}
 </div>{# /govuk-grid-row #}
 
