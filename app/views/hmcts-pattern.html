@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-  GOV.UK Prototype Kit
+GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
@@ -9,63 +9,83 @@
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-<div class="hmcts-add-another">
+    <div class="hmcts-add-another">
 
-<h1 class="govuk-heading-xl hmcts-add-another__heading" tabindex="-1">Create questions</h1>
+      <h1 class="govuk-heading-xl hmcts-add-another__heading" tabindex="-1">What health conditions, illnesses, disabilities or injuries do you have?</h1>
 
-<form method="post">
+      <form method="post">
 
-{% call govukFieldset({
-  classes: 'hmcts-add-another__item',
-  legend: {
-    text: 'Question',
-    classes: 'hmcts-add-another__title  govuk-fieldset__legend--m',
-    isPageHeading: false
-  }
-}) %}
+        <fieldset class="govuk-fieldset hmcts-add-another__item">
 
-{{ govukInput({
-  label: {
-    html: 'Subject'
-  },
-  id: 'questions[0][subject]',
-  name: 'questions[0][subject]',
-  attributes: {
-    'data-name': 'questions[%index%][subject]',
-    'data-id': 'questions[%index%][subject]'
-  }
-}) }}
+          <legend class="govuk-fieldset__legend hmcts-add-another__title  govuk-fieldset__legend--m">Condition</legend>
 
-{{ govukTextarea({
-  name: 'questions[0][question]',
-  id: 'questions[0][question]',
-  attributes: {
-    'data-name': 'questions[%index%][question]',
-    'data-id': 'questions[%index%][question]'
-  },
-  label: {
-    html: 'Question'
-  }
-}) }}
+          <div class="govuk-form-group">
+            <label class="govuk-label govuk-!-font-weight-bold" for="f-conditions[0][name]">
+              Name of condition
+            </label>
+            <span id="f-conditions[0][name]-hint" class="govuk-hint govuk-hint-black" style="color: #0B0B0B">
+              Put what's on your current fit note (you might call this a ‘sick note’), if you have one.
+            </span>
+            <input class="govuk-input" id="f-conditions[0][name]" name="conditions[0][name]" type="text" aria-describedby="f-conditions[0][name]-hint">
+          </div>{# /govuk-form-group #}
 
-{% endcall %}
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" aria-describedby="f-conditions[0][conditionStartDate]-hint" role="group">
+              <legend class="govuk-fieldset__legend govuk-!-font-weight-bold">When it first started</legend>
+              <span id="f-conditions[0][conditionStartDate]-hint" class="govuk-hint">
+                <p class="govuk-body 
+                ">If you don’t know the exact date, you can give an estimate.</p><p class="govuk-hint">For example, <span class="nobr">30 3 1997</span></p>
+              </span>
+              <div class="govuk-date-input" id="f-conditions[0][conditionStartDate]">
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][dd]">
+                      Day
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
+                    " id="f-conditions[0][conditionStartDate][dd]" name="conditions[0][conditionStartDate][dd]" type="number" pattern="[0-9]*">
+                  </div>
+                </div>{# /govuk-date-input__item #}
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][mm]">
+                      Month
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
+                    " id="f-conditions[0][conditionStartDate][mm]" name="conditions[0][conditionStartDate][mm]" type="number" pattern="[0-9]*">
+                  </div>
+                </div>{# /govuk-date-input__item #}
+                <div class="govuk-date-input__item">
+                  <div class="govuk-form-group">
+                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][yyyy]">
+                      Year
+                    </label>
+                    <input class="govuk-input govuk-date-input__input govuk-input--width-4 
+                    " id="f-conditions[0][conditionStartDate][yyyy]" name="conditions[0][conditionStartDate][yyyy]" type="number" pattern="[0-9]*">
+                  </div>
+                </div>{# /govuk-date-input__item #}
+              </div>{# /govuk-date-input #}
+            </fieldset>
+          </div>{# /govuk-form-group #}
 
-<div class="hmcts-button-action">
-  {{ govukButton({
-    text: 'Add another question',
-    classes: 'hmcts-button--secondary  hmcts-add-another__add-button  govuk-!-margin-bottom-4'
-  }) }}
-</div>
+        </fieldset>
 
-<div class="hmcts-button-action">
-  {{ govukButton({
-    text: 'Submit'
-  }) }}
-</div>
+        <div class="hmcts-button-action">
+          {{ govukButton({
+            text: 'Add another condition',
+            classes: 'hmcts-button--secondary  hmcts-add-another__add-button  govuk-!-margin-bottom-4'
+          }) }}
+        </div>
 
-</form>
+        <div class="hmcts-button-action">
+          {{ govukButton({
+            text: 'Continue'
+          }) }}
+        </div>
 
-</div> 
+      </form>
+
+    </div> 
 
   </div>{# /govuk-grid-column-two-thirds #}
 </div>{# /govuk-grid-row #}
