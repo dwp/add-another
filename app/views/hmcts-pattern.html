@@ -20,53 +20,13 @@ GOV.UK Prototype Kit
           <legend class="govuk-fieldset__legend hmcts-add-another__title  govuk-fieldset__legend--m">Condition</legend>
 
           <div class="govuk-form-group">
-            <label class="govuk-label govuk-!-font-weight-bold" for="f-conditions[0][name]">
+            <label class="govuk-label" for="conditions[0][condition]">
               Name of condition
             </label>
-            <span id="f-conditions[0][name]-hint" class="govuk-hint govuk-hint-black" style="color: #0B0B0B">
-              Put what's on your current fit note (you might call this a ‘sick note’), if you have one.
-            </span>
-            <input class="govuk-input" id="f-conditions[0][name]" name="conditions[0][name]" type="text" aria-describedby="f-conditions[0][name]-hint">
-          </div>{# /govuk-form-group #}
+            
 
-          <div class="govuk-form-group">
-            <fieldset class="govuk-fieldset" aria-describedby="f-conditions[0][conditionStartDate]-hint" role="group">
-              <legend class="govuk-fieldset__legend govuk-!-font-weight-bold">When it first started</legend>
-              <span id="f-conditions[0][conditionStartDate]-hint" class="govuk-hint">
-                <p class="govuk-body 
-                ">If you don’t know the exact date, you can give an estimate.</p><p class="govuk-hint">For example, <span class="nobr">30 3 1997</span></p>
-              </span>
-              <div class="govuk-date-input" id="f-conditions[0][conditionStartDate]">
-                <div class="govuk-date-input__item">
-                  <div class="govuk-form-group">
-                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][dd]">
-                      Day
-                    </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
-                    " id="f-conditions[0][conditionStartDate][dd]" name="conditions[0][conditionStartDate][dd]" type="number" pattern="[0-9]*">
-                  </div>
-                </div>{# /govuk-date-input__item #}
-                <div class="govuk-date-input__item">
-                  <div class="govuk-form-group">
-                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][mm]">
-                      Month
-                    </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-2 
-                    " id="f-conditions[0][conditionStartDate][mm]" name="conditions[0][conditionStartDate][mm]" type="number" pattern="[0-9]*">
-                  </div>
-                </div>{# /govuk-date-input__item #}
-                <div class="govuk-date-input__item">
-                  <div class="govuk-form-group">
-                    <label class="govuk-label govuk-date-input__label" for="f-conditions[0][conditionStartDate][yyyy]">
-                      Year
-                    </label>
-                    <input class="govuk-input govuk-date-input__input govuk-input--width-4 
-                    " id="f-conditions[0][conditionStartDate][yyyy]" name="conditions[0][conditionStartDate][yyyy]" type="number" pattern="[0-9]*">
-                  </div>
-                </div>{# /govuk-date-input__item #}
-              </div>{# /govuk-date-input #}
-            </fieldset>
-          </div>{# /govuk-form-group #}
+            <input class="govuk-input" id="conditions[0][condition]" name="conditions[0][condition]" type="text" data-name="conditions[%index%][condition]" data-id="conditions[%index%][condition]">
+          </div>
 
         </fieldset>
 
