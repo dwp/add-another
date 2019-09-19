@@ -31,6 +31,9 @@
           html: 'First name',
           classes: 'govuk-!-font-weight-bold'
         },
+        hint: {
+          text: "The name you’ll use on promotional material."
+        },
         attributes: {
           'data-name': 'person[%index%][first_name]',
           'data-id': 'person[%index%][first_name]'
@@ -95,18 +98,22 @@
         ]
       }) }}
 
-      trhrthtrhrt
+{#       trhrthtrhrt #}
 
-      {{ govukInput({
+{#       {{ govukInput({
         label: {
           text: "Event name"
         },
         hint: {
           text: "The name you’ll use on promotional material."
         },
-        id: "event-name",
-        name: "event-name"
-      }) }}
+        id: "person[0][event-name]",
+        name: "person[0][event-name]",
+        attributes: {
+                  'data-name': 'person[%index%][event-name]',
+                  'data-id': 'person[%index%][event-name]'
+                }
+      }) }} #}
 
       {% endcall %}
 
