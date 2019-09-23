@@ -16,3 +16,27 @@ $govuk-assets-path: '/govuk/assets/';
 @import "components/cookie-banner";
 
 // Add extra styles here, or re-organise the Sass files in whichever way makes most sense to you
+
+
+.link-button {
+	color: blue;
+  padding: 0;
+  border: none;
+  font-family: "GDS Transport", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: govuk-colour("blue");
+  background-color: transparent;
+  text-decoration: underline;
+  cursor: pointer;
+  @include govuk-media-query($from: tablet) {
+    font-size: 19px;
+    line-height: 25px;
+  }
+  &:visited {
+    color: govuk-colour("purple");
+  }
+  &:hover {
+    color: govuk-colour("dark-blue");
+  }
+}
