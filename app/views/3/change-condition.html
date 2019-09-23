@@ -17,18 +17,10 @@
 
 {% block content %}
 
-  {% if count %}
-  {% else %}
-    {% set count = "1" %}
-  {% endif %}
-
+  {% set count = getData.count %}
+  {% set conditionID = getData.conditionID %}
   Count = {{count}}
-
-  {% if conditionID %}
-  {% else %}
-    {% set conditionID = "1" %}
-  {% endif %}
-  conditionID = {{conditionID}}
+  Condition ID = {{conditionID}}
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
@@ -39,23 +31,22 @@
       <form action="/3/other-conditions" method="post" novalidate>
 
         <input type="hidden" name="count" id="count" value="{{ count }}">
-        <input type="hidden" name="conditionID" id="conditionID" value="{{ conditionID }}">
 
         <div class="govuk-form-group">
           <label class="govuk-label govuk-label--m" for="condition-name-1">
             Name of condition
           </label>
-          <span id="condition-name-{{count}}-hint" class="govuk-hint">
+          <span id="condition-name-hint-{{count}}" class="govuk-hint">
             Put what’s on your current fit note (you might call this a ‘sick note’), if you have one.
           </span>
-          <input class="govuk-input govuk-input--width-12" id="condition-name-{{conditionID}}" name="condition-name-{{conditionID}}" type="text" aria-describedby="condition-name-{{conditionID}}-hint">
+          <input class="govuk-input govuk-input--width-12" id="condition-name-{{conditionID}}" name="condition-name-{{conditionID}}" type="text" aria-describedby="condition-name-hint-{{conditionID}}" value="{{ data['condition-name-' + conditionID] | capitalize }}">
         </div>
 
         <div class="govuk-form-group">
-          <fieldset class="govuk-fieldset" aria-describedby="date-start-1-hint" role="group">
+          <fieldset class="govuk-fieldset" aria-describedby="date-start-hint-1" role="group">
             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">When it first started (this can be an estimate)
             </legend>
-            <span id="date-start-1-hint" class="govuk-hint">
+            <span id="date-start-hint-1" class="govuk-hint">
               For example, 30 3 2010
             </span>
             <div class="govuk-date-input" id="date-start-1">
@@ -64,7 +55,7 @@
                   <label class="govuk-label govuk-date-input__label" for="date-start-day-{{conditionID}}">
                     Day
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-start-day-{{conditionID}}" name="date-start-day-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-day-{{conditionID}}'] }}">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-start-day-{{conditionID}}" name="date-start-day-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-day-' + conditionID] }}">
                 </div>
               </div>
               <div class="govuk-date-input__item">
@@ -72,7 +63,7 @@
                   <label class="govuk-label govuk-date-input__label" for="date-start-month-{{conditionID}}">
                     Month
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-start-month-{{conditionID}}" name="date-start-month-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-month-{{conditionID}}'] }}">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="date-start-month-{{conditionID}}" name="date-start-month-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-month-' + conditionID] }}">
                 </div>
               </div>
               <div class="govuk-date-input__item">
@@ -80,7 +71,7 @@
                   <label class="govuk-label govuk-date-input__label" for="date-start-year-{{conditionID}}">
                     Year
                   </label>
-                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date-start-year-{{conditionID}}" name="date-start-year-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-year-{{conditionID}}'] }}">
+                  <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="date-start-year-{{conditionID}}" name="date-start-year-{{conditionID}}" type="number" pattern="[0-9]*" value="{{ data['date-start-year-' + conditionID] }}">
                 </div>
               </div>
             </div>

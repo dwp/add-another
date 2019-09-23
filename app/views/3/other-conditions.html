@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+GOV.UK Prototype Kit
+{% endblock %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block beforeContent %}
+<a href="javascript:history.back()" rel="prev" class="govuk-back-link">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {% if count %}
+    {% else %}
+      {% set count = "1" %}
+    {% endif %}
+
+    Count = {{count}}
+
+    {% if conditionID %}
+    {% else %}
+      {% set conditionID = "1" %}
+    {% endif %}
+    conditionID = {{conditionID}}
+
+    <h1 class="govuk-heading-xl">Conditions you have told us about</h1>
+
+    <dl class="govuk-summary-list">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
+          {{ data['condition-name-1'] | capitalize }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          First started:<br>
+          {{ data['date-start-day-1'] }}{{ data['date-start-month-1'] }}{{ data['date-start-year-1'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+          <a class="govuk-link" href="change-condition?conditionID=1&count={{count}}">
+            Change<span class="govuk-visually-hidden"> data['condition-name-1']</span>
+          </a>
+        </dd>
+      </div>
+
+      {% if count >= 2 %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
+          {{ data['condition-name-2'] | capitalize }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          First started:<br>
+          {{ data['date-start-day-2'] }}{{ data['date-start-month-2'] }}{{ data['date-start-year-2'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="change-condition?conditionID=2&count={{count}}">
+                Change<span class="govuk-visually-hidden"> data['condition-name-2']</span>
+              </a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="delete">
+                Delete<span class="govuk-visually-hidden"> data['condition-name-2']</span>
+              </a>
+            </li>
+          </ul>
+        </dd>
+      </div>
+      {% endif %}
+
+      {% if count >= 3 %}
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
+          {{ data['condition-name-3'] | capitalize }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          First started:<br>
+          {{ data['date-start-day-3'] }}{{ data['date-start-month-3'] }}{{ data['date-start-year-3'] }}
+        </dd>
+        <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+          <ul class="govuk-summary-list__actions-list">
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="change-condition?conditionID=3&count={{count}}">
+                Change<span class="govuk-visually-hidden"> data['condition-name-3']</span>
+              </a>
+            </li>
+            <li class="govuk-summary-list__actions-list-item">
+              <a class="govuk-link" href="?count=2&remove=3">
+                Delete<span class="govuk-visually-hidden"> data['condition-name-3']</span>
+              </a>
+            </li>
+          </ul>
+        </dd>
+      </div>
+      {% endif %}
+
+    </dl>
+
+    <form class="form" action="/3/condition" method="post">
+
+      <h2 class="govuk-heading-l">Do you have any other conditions?</h2>
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <div class="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="yes" name="other-conditions" type="radio" value="yes">
+              <label class="govuk-label govuk-radios__label" for="yes">
+                Yes
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="no" name="other-conditions" type="radio" value="no">
+              <label class="govuk-label govuk-radios__label" for="no">
+                No
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <button class="govuk-button">Continue</button>
+
+    </form>
+
+  </div>
+</div>
+{% endblock %}
