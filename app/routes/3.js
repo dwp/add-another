@@ -59,7 +59,9 @@ module.exports = function (app) {
   // OTHER CONDITONS GET
 
   app.get('/3/other-conditions', function (req, res) {
+
     res.render('3/other-conditions', {'conditions': req.session.conditions})
+    
   })
 
   // OTHER CONDITIONS POST
