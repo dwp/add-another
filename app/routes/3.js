@@ -14,71 +14,79 @@ module.exports = function (app) {
     next();
   });
 
-  // ENTER CONDITION DETAILS
+  // CONDITION POST
 
   app.post('/3/condition', function (req, res) {
 
-    var count = parseInt(req.session.data['count'], 10)
-    var conditionID = parseInt(req.session.data['conditionID'], 10)
+    const { name, day, month, year, index } = req.body;
 
-    if (count) {
-      res.render('3/condition', {'count': (count+1), 'conditionID': (conditionID+1)})
-    } else {
-      res.render('error')
+    if (!req.session.conditions) {
+      req.session.conditions = []
     }
+
+    if (index) {
+      req.session.conditions[index] = {
+        name,
+        day,
+        month,
+        year
+      } 
+    } else {
+      req.session.conditions.push({
+        name,
+        day,
+        month,
+        year
+      })
+    }
+
+    req.session.save(() => {
+      res.redirect('/3/other-conditions');
+    })
 
   })
 
-  // OTHER CONDITIONS
+  // CONDITION GET
+
+  app.get('/3/condition', function (req, res) {
+
+    const { index } = req.query;
+
+    res.render('3/condition', {'condition': index && req.session.conditions && req.session.conditions[index], conditionIndex: index})
+
+  })
+
+  // OTHER CONDITONS GET
+
+  app.get('/3/other-conditions', function (req, res) {
+    res.render('3/other-conditions', {'conditions': req.session.conditions})
+  })
+
+  // OTHER CONDITIONS POST
 
   app.post('/3/other-conditions', function (req, res) {
 
-    var count = parseInt(req.session.data['count'], 10)
-    var conditionID = parseInt(req.session.data['conditionID'], 10)
+    let question = req.session.data['question']
 
-    if (count) {
-      res.render('3/other-conditions', {'count': (count), 'conditionID': (conditionID)})
+    if (question === 'yes') {
+      res.redirect(`condition`)
+    } else if (question === 'no') {
+      res.redirect(`done`)
     } else {
-      res.render('error')
+      res.redirect('error')
     }
 
   })
 
-  // DELETE CONDITION 1
+  app.post('/3/delete-condition', function (req, res) {
 
-  app.get('/3/delete-condition-1', function (req, res) {
+    const { index } = req.body;
 
-    var count = parseInt(req.session.data['count'], 10)
-    var conditionID = parseInt(req.session.data['conditionID'], 10)
-
-    res.render('3/other-conditions', {'count': (count-1), 'conditionID': (conditionID-1), 'deleted': (1) })
-
-  })
-
-  // DELETE CONDITION 2
-
-  app.get('/3/delete-condition-2', function (req, res) {
-
-    var count = parseInt(req.session.data['count'], 10)
-    var conditionID = parseInt(req.session.data['conditionID'], 10)
-
-    res.render('3/other-conditions', {'count': (count-1), 'conditionID': (conditionID-1), 'deleted': (2) })
+    req.session.conditions.splice(index,1);
+    req.session.save(() => {
+      res.redirect('/3/other-conditions');
+    })
 
   })
-
-  // DELETE CONDITION 3
-
-  app.get('/3/delete-condition-3', function (req, res) {
-
-    var count = parseInt(req.session.data['count'], 10)
-    var conditionID = parseInt(req.session.data['conditionID'], 10)
-
-    res.render('3/other-conditions', {'count': (count-1), 'conditionID': (conditionID-1), 'deleted': (3) })
-
-  })
-
-
-
-  // END OF VERSION A ROUTES
 
 }

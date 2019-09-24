@@ -17,147 +17,66 @@ GOV.UK Prototype Kit
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
 
-    {% if count %}
-    {% else %}
-      {% set count = "1" %}
-    {% endif %}
+    <h1 class="govuk-heading-xl">Conditions you have told us about</h1>
 
-    Count = {{count}}
+    <dl class="govuk-summary-list" style="width: 100%">
 
-    {% if conditionID %}
-    {% else %}
-      {% set conditionID = "1" %}
-    {% endif %}
-    conditionID = {{conditionID}}
+      {% for item in conditions %}
 
+      <form action="/3/delete-condition" method="post" novalidate>
 
-    Delete condition = {{deleted}}
+        <input name="index" type="hidden" value="{{loop.index0}}" />
 
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key" style="width: 40%">
+            {{ item.name | capitalize }}
+          </dt>
+          <dd class="govuk-summary-list__value" style="width: 20%">
+            First started:<br>
+            {{ item.day }} / {{ item.month }} / {{ item.year }}
+          </dd>
+          <dd class="govuk-summary-list__actions" style="width: 20%">
 
-
-
-
-
-    {# Calculations to sort out conditions #}
-
-{#     {% if count > conditionID %}
-      {% set count = conditionID %}
-    {% else %}
-      everything is fine
-    {% endif %} #}
-
-
-    <form action="/3/delete-condition" method="post" novalidate>
-
-      <input type="hidden" name="count" id="count" value="{{ count }}">
-      <input type="hidden" name="conditionID" id="conditionID" value="{{ conditionID }}">
-
-      <h1 class="govuk-heading-xl">Conditions you have told us about</h1>
-
-      <dl class="govuk-summary-list">
-        {% if deleted != 1 %}
-          <div class="govuk-summary-list__row">
-            <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-              {{ data['condition-name-1'] | capitalize }}
-            </dt>
-            <dd class="govuk-summary-list__value">
-              First started:<br>
-              {{ data['date-start-day-1'] }}{{ data['date-start-month-1'] }}{{ data['date-start-year-1'] }}
-            </dd>
-            <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
+            {% if loop.length <= 1 %}
+              <a class="govuk-link" href="condition?index={{loop.index0}}">
+                Change<span class="govuk-visually-hidden"> {{ item.name }}</span>
+              </a>
+            {% else %}
               <ul class="govuk-summary-list__actions-list">
                 <li class="govuk-summary-list__actions-list-item">
-                  <a class="govuk-link" href="change-condition?conditionID=1&count={{count}}">
-                    Change<span class="govuk-visually-hidden"> data['condition-name-1']</span>
+                  <a class="govuk-link" href="condition?index={{loop.index0}}">
+                    Change<span class="govuk-visually-hidden"> {{ item.name }}</span>
                   </a>
                 </li>
                 <li class="govuk-summary-list__actions-list-item">
-                  <a class="govuk-link" href="/3/delete-condition-1?conditionID={{conditionID}}&count={{count}}">
-                    Delete<span class="govuk-visually-hidden"> data['condition-name-1']</span>
-                  </a>
+                  <button class="link-button">Delete<span class="govuk-visually-hidden"> {{ item.name }}</span></button>
                 </li>
               </ul>
-            </dd>
-          </div>
-        {% endif %}
+            {% endif %}
 
-        {% if count >= 2 %}
-          {% if deleted != 2 %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                {{ data['condition-name-2'] | capitalize }}
-              </dt>
-              <dd class="govuk-summary-list__value">
-                First started:<br>
-                {{ data['date-start-day-2'] }}{{ data['date-start-month-2'] }}{{ data['date-start-year-2'] }}
-              </dd>
-              <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="change-condition?conditionID=2&count={{count}}">
-                      Change<span class="govuk-visually-hidden"> data['condition-name-2']</span>
-                    </a>
-                  </li>
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="/3/delete-condition-2?conditionID={{conditionID}}&count={{count}}">
-                      Delete<span class="govuk-visually-hidden"> data['condition-name-2']</span>
-                    </a>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          {% endif %}
-        {% endif %}
+          </dd>
+        </div>
 
-        {% if count >= 3 %}
-          {% if deleted != 3 %}
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key govuk-!-width-one-quarter">
-                {{ data['condition-name-3'] | capitalize }}
-              </dt>
-              <dd class="govuk-summary-list__value">
-                First started:<br>
-                {{ data['date-start-day-3'] }}{{ data['date-start-month-3'] }}{{ data['date-start-year-3'] }}
-              </dd>
-              <dd class="govuk-summary-list__actions govuk-!-width-one-quarter">
-                <ul class="govuk-summary-list__actions-list">
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="change-condition?conditionID=3&count={{count}}">
-                      Change<span class="govuk-visually-hidden"> data['condition-name-3']</span>
-                    </a>
-                  </li>
-                  <li class="govuk-summary-list__actions-list-item">
-                    <a class="govuk-link" href="/3/delete-condition-3?conditionID={{conditionID}}&count={{count}}">
-                      Delete<span class="govuk-visually-hidden"> data['condition-name-3']</span>
-                    </a>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          {% endif %}
-        {% endif %}
+      </form>
 
-      </dl>
+      {% endfor %}
 
-    </form>
+    </dl>
 
-    <form class="form" action="/3/condition" method="post">
-
-      <input type="hidden" name="count" id="count" value="{{ count }}">
-      <input type="hidden" name="conditionID" id="conditionID" value="{{ conditionID }}">
+    <form class="form" action="/3/other-conditions" method="post">
 
       <h2 class="govuk-heading-l">Do you have any other conditions?</h2>
       <div class="govuk-form-group">
         <fieldset class="govuk-fieldset">
           <div class="govuk-radios">
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="yes" name="other-conditions" type="radio" value="yes">
+              <input class="govuk-radios__input" id="yes" name="question" type="radio" value="yes">
               <label class="govuk-label govuk-radios__label" for="yes">
                 Yes
               </label>
             </div>
             <div class="govuk-radios__item">
-              <input class="govuk-radios__input" id="no" name="other-conditions" type="radio" value="no">
+              <input class="govuk-radios__input" id="no" name="question" type="radio" value="no">
               <label class="govuk-label govuk-radios__label" for="no">
                 No
               </label>
