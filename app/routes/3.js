@@ -71,9 +71,16 @@ module.exports = function (app) {
     let question = req.session.data['question']
 
     if (question === 'yes') {
-      res.redirect(`condition`)
+      req.session.save(() => {
+        res.redirect(`condition`)
+      })
+      
     } else if (question === 'no') {
-      res.redirect(`done`)
+      delete req.session.conditions;
+      req.session.save(() => {
+        res.redirect(`done`)
+      })
+      
     } else {
       res.redirect('error')
     }
