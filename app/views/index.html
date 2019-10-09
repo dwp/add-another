@@ -2,23 +2,45 @@
 {% extends "layout.html" %}
 
 {% block pageTitle %}
-  GOV.UK Prototype Kit
+GOV.UK Prototype Kit
 {% endblock %}
 
 {% block content %}
 
 <div class="govuk-grid-row">
-  <div class="govuk-grid-column-two-thirds">
+	<div class="govuk-grid-column-two-thirds">
 
-    <h1 class="govuk-heading-xl">‘Add another’ patterns to test with screen reader users</h1>
+		<h1 class="govuk-heading-xl">‘Add another’ patterns to test with screen reader users</h1>
 
-    <ol class="govuk-list govuk-list--number">
-{#       <li><a href="1/hmcts-pattern">HMCTS ‘Add another’ pattern</a></li> #}
-      <li><a href="2/index">Single page pattern (based on MOJ example)</a></li>
-      <li><a href="3/condition">Looping pattern</a></li>
-    </ul>
+    <h2 class="govuk-heading-l">Prototypes</h2>
 
-  </div>{# /govuk-grid-column-two-thirds #}
+    <div style="padding: 20px; padding-bottom: 0; border: 4px solid #1D70B8; margin-bottom: 40px">
+  		<ol class="govuk-list govuk-list--number">
+  			<li><a href="2/index">Single page pattern (based on MOJ example)</a></li>
+  			<li><a href="3/condition">Looping pattern</a></li>
+  		</ol>
+    </div>
+
+		<h2 class="govuk-heading-l">Notes from user research</h2>
+		<p>We tested a couple of versions of the ‘add another’ pattern on 9 October 2019 with someone who is visually impaired and uses the screen reader, JAWS.</p>
+		<h3 class="govuk-heading-m">Version 1 - Single page (based on MOJ pattern)</h3>
+		<p>The user heard ‘You can add more than one condition if you need to’ and took this to mean he could add multiple conditions into the ‘Name of condition’ field. He suggested changing the field label to something like ‘First condition’ to make it clearer. He realised this error when he got to the ‘Add another condition’ button.</p>
+		<p>Automatically focusing on the field after clicking the ‘add another condition’ button seemed to work well. It was clear to him where he was on the page.</p>
+		<p>When asked to remove a condition, he was able to navigate back through his answers to the right condition and complete the task, as the ‘remove’ button was in a logical place.</p>
+		<p>Automatically focusing on the H1 after removing a condition seemed to work well as it was clear to him where he was on the page.</p>
+		<p>He entered the full date in the day field to begin with. He realised this mistake though and corrected it.</p>
+		<p>The fact that there’s no confirmation message after something had been removed didn’t cause an issue.</p>
+		<h3 class="govuk-heading-m">Version 2 - Looping pattern</h3>
+		<p>The ‘If you have more than one condition, you will be able to tell us about it on the next screen.’ made sense - he knew that we only needed to add one condition.</p>
+		<p>The visually hidden text in links and buttons was useful and made it quicker for him to understand what these would do without needing to hear the content that came before the link (‘delete broken leg’ etc).</p>
+		<p>There seemed to be an issue when changing a condition. For some reason, he was taken to the bottom of the screen after clicking ‘change’. We tried this a few times and this seemed to be happening consistently so is something to investigate (not sure why it’s happening now).</p>
+		<p>The fact that no confirmation message after something had been removed didn’t cause an issue.</p>
+		<h3 class="govuk-heading-m">Conclusion</h3>
+		<p>Both prototypes could be made to work for this user with a bit of tweaking.</p>
+		<p>The first one would need a fall-back if JavaScript is unavailable / switched off, which would need to be tested separately.</p>
+		<p>The second version is a bit more verbose and takes longer to input the conditions, but is arguably clearer due to the use of the hidden text in the links/buttons. Work needs to be done to address the issue of the user being taken to the bottom of the screen though.</p>
+
+	</div>{# /govuk-grid-column-two-thirds #}
 </div>{# /govuk-grid-row #}
 
 {% endblock %}
